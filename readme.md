@@ -10,8 +10,8 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 kubectl version --client
 
 ### Export variabel yang nanti akan dibutuhkan  ###
-export bucket_name=k8s-jokoss-site
-export KOPS_CLUSTER_NAME=k8s.jokoss.site
+export bucket_name=<S3 bucket that already created>
+export KOPS_CLUSTER_NAME=<cluster name>
 export KOPS_STATE_STORE=s3://${bucket_name}
 
 ### Create cluster ###
@@ -127,9 +127,9 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install wordpress-deployment bitnami/wordpress \
 --namespace=production \
 --set mariadb.enabled=false \
---set externalDatabase.host="databasecilsy.cqtgouliw6ug.ap-southeast-1.rds.amazonaws.com" \
---set externalDatabase.user=admin \
---set externalDatabase.password=DBb00tC1lsy# \
+--set externalDatabase.host=<RDS Database endpoint> \
+--set externalDatabase.user=<RDS username> \
+--set externalDatabase.password=<RDS password> \
 --set externalDatabase.database=wordpress --set externalDatabase.port=3306 \
 --set service.type=ClusterIP \
 --set ingress.enabled=true \
